@@ -29,7 +29,7 @@
                     @error('sub_cat_id') <p class="small text-danger">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="col-sm-4">
+                {{-- <div class="col-sm-4">
                     <select class="form-control" name="collection_id">
                         <option hidden selected>Select collection...</option>
                         @foreach ($collections as $index => $item)
@@ -37,7 +37,7 @@
                         @endforeach
                     </select>
                     @error('collection_id') <p class="small text-danger">{{ $message }}</p> @enderror
-                </div>
+                </div> --}}
             </div>
 
             <div class="form-group mb-3">
@@ -77,29 +77,29 @@
                     <content>
                         <div class="row mb-2 align-items-center">
                         <div class="col-3">
-                            <label for="inputPassword6" class="col-form-label">Regular Price</label>
+                            <label for="inputPassword6" class="col-form-label">Cost Price</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="price" value="{{old('price')}}">
-                            @error('price') <p class="small text-danger">{{ $message }}</p> @enderror
+                            <input type="number" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="cost_price" value="{{old('cost_price')}}">
+                            @error('cost_price') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="col-auto">
                             <span id="priceHelpInline" class="form-text">
-                            Must be 8-20 characters long.
+                            Must be 1-10 characters long.
                             </span>
                         </div>
                         </div>
                         <div class="row mb-2 align-items-center">
                         <div class="col-3">
-                            <label for="inputprice6" class="col-form-label">Offer Price</label>
+                            <label for="inputprice6" class="col-form-label">Sell Price</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="offer_price" value="{{old('offer_price')}}">
-                            @error('offer_price') <p class="small text-danger">{{ $message }}</p> @enderror
+                            <input type="number" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="sell_price" value="{{old('sell_price')}}">
+                            @error('sell_price') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="col-auto">
                             <span id="passwordHelpInline" class="form-text">
-                            Must be 8-20 characters long.
+                            Must be 1-10 characters long.
                             </span>
                         </div>
                         </div>
@@ -107,30 +107,38 @@
                     </div>
                     <div class="admin__content">
                         <aside>
-                            <nav>Meta</nav>
+                            <nav>Unit</nav>
                         </aside>
                         <content>
                             <div class="row mb-2 align-items-center">
                                 <div class="col-3">
-                                    <label for="inputPassword6" class="col-form-label">Title</label>
+                                    <label for="inputPassword6" class="col-form-label">Value</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="meta_title" value="{{old('meta_title')}}">
-                                    @error('meta_title') <p class="small text-danger">{{ $message }}</p> @enderror
+                                    <input type="number" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="unit_value" value="{{old('unit_value')}}">
+                                    @error('unit_value') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
                                     <span id="priceHelpInline" class="form-text">
-                                    Must be 8-20 characters long.
+                                    Must be 1-20 characters long.
                                     </span>
                                 </div>
                             </div>
                             <div class="row mb-2 align-items-center">
                                 <div class="col-3">
-                                    <label for="inputprice6" class="col-form-label">Description</label>
+                                    <label for="inputprice6" class="col-form-label">Type</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="meta_desc" value="{{old('meta_desc')}}">
-                                    @error('meta_desc') <p class="small text-danger">{{ $message }}</p> @enderror
+                                    {{-- <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="unit_type" value="{{old('unit_type')}}"> --}}
+                                    <select name="unit_type" id="unit_type" class="form-control" value="{{old('unit_type')}}">
+                                        <option value="litres">Litres</option>
+                                        <option value="kgs">KGs</option>
+                                        <option value="grams">Grams</option>
+                                        <option value="oz">OZ</option>
+                                        <option value="pcs">Pieces</option>
+                                    </select>
+
+                                    @error('unit_type') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
                                     <span id="passwordHelpInline" class="form-text">
@@ -138,47 +146,13 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="row mb-2 align-items-center">
-                                <div class="col-3">
-                                    <label for="inputprice6" class="col-form-label">Keyword</label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="meta_keyword" value="{{old('meta_keyword')}}">
-                                    @error('meta_keyword') <p class="small text-danger">{{ $message }}</p> @enderror
-                                </div>
-                                <div class="col-auto">
-                                    <span id="passwordHelpInline" class="form-text">
-                                    Must be 8-20 characters long.
-                                    </span>
-                                </div>
-                            </div>
-                        </content>
-                    </div>
-                    <div class="admin__content">
-                        <aside>
-                            <nav>Data</nav>
-                        </aside>
-                        <content>
-                            <div class="row mb-2 align-items-center">
-                            <div class="col-3">
-                                <label for="inputPassword6" class="col-form-label">Style No</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="style_no" value="{{old('style_no')}}">
-                                @error('style_no') <p class="small text-danger">{{ $message }}</p> @enderror
-                            </div>
-                            <div class="col-auto">
-                                <span id="priceHelpInline" class="form-text">
-                                Must be 8-20 characters long.
-                                </span>
-                            </div>
-                            </div>
+                            
                         </content>
                     </div>
                 </div>
             </div>
 
-            <div class="card shadow-sm">
+            {{-- <div class="card shadow-sm">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -217,7 +191,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
         <div class="col-sm-3">

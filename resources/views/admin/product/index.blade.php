@@ -81,11 +81,10 @@
                 </th>
                 <th class="text-center"><i class="fi fi-br-picture"></i></th>
                 <th>Name</th>
-                <th>Style No.</th>
-                <th>Collection</th>
                 <th>Category</th>
-                <th>Price</th>
-                <th>Action</th>
+                <th>Cost Price</th>
+                <th>Sell Price</th>
+                {{-- <th>Action</th> --}}
                 <th>Date</th>
                 <th>Status</th>
             </tr>
@@ -124,19 +123,18 @@
                             <a href="{{ route('admin.product.delete', $item->id) }}" class="text-danger">Delete</a>
                         </div>
                     </td>
-                    <td>{{$item->style_no}}</td>
-                    <td>
-                        <a href="{{ route('admin.collection.view', $item->collection->id) }}">{{$item->collection ? $item->collection->name : ''}}</a>
-                    </td>
                     <td>
                         <a href="{{ route('admin.category.view', $item->category->id) }}">{{$item->category ? $item->category->name : ''}}</a>
-                        {{-- > --}}
-                        {{-- {{$item->subCategory ? $item->subCategory->name : 'NA'}} --}}
+                        >
+                        {{$item->subCategory ? $item->subCategory->name : 'NA'}}
                     </td>
                     <td>
-                        <small> <del>{{$item->price}}</del> </small> Rs. {{$item->offer_price}}
+                        Rs. {{$item->cost_price}}
                     </td>
                     <td>
+                        Rs. {{$item->sell_price}}
+                    </td>
+                    {{-- <td>
                         <a href="{{ route('admin.product.sale', $item->id) }}" class="text-decoration-none">
                             @if ($item->saleDetails)
                                 <span class="text-success fw-bold"> <i class="fi-br-check"></i> Sale</span>
@@ -152,7 +150,7 @@
                                 <span class="text-danger fw-bold single-line"> <i class="fi-br-plus"></i> Trending</span>
                             @endif
                         </a>
-                    </td>
+                    </td> --}}
                     <td>Published<br/>{{date('j M Y', strtotime($item->created_at))}}</td>
                     <td><span class="badge bg-{{($item->status == 1) ? 'success' : 'danger'}}">{{($item->status == 1) ? 'Active' : 'Inactive'}}</span></td>
                 </tr>

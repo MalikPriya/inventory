@@ -71,7 +71,7 @@
                                 </div>
                             </td>
                             <td>{{$product->style_no}}</td>
-                            <td>{{$product->category->name}}</td>
+                            <td>{{$product->category ? $product->category->name : ''}}</td>
                             <td>Rs. {{$product->offer_price}}</td>
                         </tr>
                     @endforeach

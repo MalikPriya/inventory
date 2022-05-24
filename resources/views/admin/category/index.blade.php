@@ -86,11 +86,7 @@
                                         </div>
                                     </th>
                                     <th class="text-center"><i class="fi fi-br-picture"></i> Icon</th>
-                                    <th class="text-center"><i class="fi fi-br-picture"></i> Sketch</th>
-                                    <th class="text-center"><i class="fi fi-br-picture"></i> Thumb</th>
-                                    <th class="text-center"><i class="fi fi-br-picture"></i> Banner</th>
                                     <th>Name</th>
-                                    <th>Products</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                 </tr>
@@ -119,27 +115,15 @@
                                     <td class="text-center column-thumb">
                                         <img src="{{ asset($item->icon_path) }}">
                                     </td>
-                                    <td class="text-center column-thumb">
-                                        <img src="{{ asset($item->sketch_icon) }}">
-                                    </td>
-                                    <td class="text-center column-thumb">
-                                        <img src="{{ asset($item->image_path) }}">
-                                    </td>
-                                    <td class="text-center column-thumb">
-                                        <img src="{{ asset($item->banner_image) }}">
-                                    </td>
                                     <td>
                                         <h3 class="text-dark">{{$item->name}}</h3>
-                                        <p>{{$item->parentCatDetails->name}}</p>
+                                      
                                         <div class="row__action">
                                             <a href="{{ route('admin.category.view', $item->id) }}">Edit</a>
                                             <a href="{{ route('admin.category.view', $item->id) }}">View</a>
                                             <a href="{{ route('admin.category.status', $item->id) }}">{{($item->status == 1) ? 'Active' : 'Inactive'}}</a>
                                             <a href="{{ route('admin.category.delete', $item->id) }}" class="text-danger">Delete</a>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.category.view', $item->id) }}">{{$item->ProductDetails->count()}} products</a>
                                     </td>
                                     <td>Published<br />{{date('d M Y', strtotime($item->created_at))}}</td>
                                     <td><span class="badge bg-{{($item->status == 1) ? 'success' : 'danger'}}">{{($item->status == 1) ? 'Active' : 'Inactive'}}</span></td>
@@ -170,11 +154,6 @@
                                     @error('name') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="label-control">Parent <span class="text-danger">*</span> </label>
-                                    <input type="text" name="parent" placeholder="" class="form-control" value="{{old('parent')}}">
-                                    @error('parent') <p class="small text-danger">{{ $message }}</p> @enderror
-                                </div>
-                                <div class="form-group mb-3">
                                     <label class="label-control">Description </label>
                                     <textarea name="description" class="form-control">{{old('description')}}</textarea>
                                     @error('description') <p class="small text-danger">{{ $message }}</p> @enderror
@@ -200,65 +179,6 @@
                                             </script>
                                         </div>
                                         @error('icon_path') <p class="small text-danger">{{ $message }}</p> @enderror
-                                    </div>
-                                    <div class="col-md-6 card">
-                                        <div class="card-header p-0 mb-3">Sketch icon <span class="text-danger">*</span></div>
-                                        <div class="card-body p-0">
-                                            <div class="w-100 product__thumb">
-                                                <label for="sketch_icon"><img id="sketchOutput" src="{{ asset('admin/images/placeholder-image.jpg') }}" /></label>
-                                            </div>
-                                            <input type="file" name="sketch_icon" id="sketch_icon" accept="image/*" onchange="loadSketch(event)" class="d-none">
-                                            <script>
-                                                let loadSketch = function(event) {
-                                                    let sketchOutput = document.getElementById('sketchOutput');
-                                                    sketchOutput.src = URL.createObjectURL(event.target.files[0]);
-                                                    sketchOutput.onload = function() {
-                                                        URL.revokeObjectURL(sketchOutput.src) // free memory
-                                                    }
-                                                };
-                                            </script>
-                                        </div>
-                                        @error('sketch_icon') <p class="small text-danger">{{ $message }}</p> @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 card">
-                                        <div class="card-header p-0 mb-3">Thumbnail <span class="text-danger">*</span></div>
-                                        <div class="card-body p-0">
-                                            <div class="w-100 product__thumb">
-                                                <label for="thumbnail"><img id="output" src="{{ asset('admin/images/placeholder-image.jpg') }}" /></label>
-                                            </div>
-                                            <input type="file" name="image_path" id="thumbnail" accept="image/*" onchange="loadFile(event)" class="d-none">
-                                            <script>
-                                                let loadFile = function(event) {
-                                                    let output = document.getElementById('output');
-                                                    output.src = URL.createObjectURL(event.target.files[0]);
-                                                    output.onload = function() {
-                                                        URL.revokeObjectURL(output.src) // free memory
-                                                    }
-                                                };
-                                            </script>
-                                        </div>
-                                        @error('image_path') <p class="small text-danger">{{ $message }}</p> @enderror
-                                    </div>
-                                    <div class="col-md-6 card">
-                                        <div class="card-header p-0 mb-3">Banner <span class="text-danger">*</span></div>
-                                        <div class="card-body p-0">
-                                            <div class="w-100 product__thumb">
-                                                <label for="banner"><img id="bannerOutput" src="{{ asset('admin/images/placeholder-image.jpg') }}" /></label>
-                                            </div>
-                                            <input type="file" name="banner_image" id="banner" accept="image/*" onchange="loadBanner(event)" class="d-none">
-                                            <script>
-                                                let loadBanner = function(event) {
-                                                    let output = document.getElementById('bannerOutput');
-                                                    output.src = URL.createObjectURL(event.target.files[0]);
-                                                    output.onload = function() {
-                                                        URL.revokeObjectURL(output.src) // free memory
-                                                    }
-                                                };
-                                            </script>
-                                        </div>
-                                        @error('banner_image') <p class="small text-danger">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
                             </div>

@@ -83,20 +83,6 @@ class CategoryRepository implements CategoryInterface
         $uploadedImage = $imageName;
         $category->icon_path = $upload_path.$uploadedImage;
 
-        // thumb image
-        $image = $collection['image_path'];
-        $imageName = time().".".mt_rand().".".$image->getClientOriginalName();
-        $image->move($upload_path, $imageName);
-        $uploadedImage = $imageName;
-        $category->image_path = $upload_path.$uploadedImage;
-
-        // banner image
-        $bannerImage = $collection['banner_image'];
-        $bannerImageName = time().".".mt_rand().".".$bannerImage->getClientOriginalName();
-        $bannerImage->move($upload_path, $bannerImageName);
-        $uploadedImage = $bannerImageName;
-        $category->banner_image = $upload_path.$uploadedImage;
-
         $category->save();
 
         return $category;

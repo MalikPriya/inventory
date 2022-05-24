@@ -12,7 +12,7 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    private CategoryInterface $categoryRepository;
+    //private CategoryInterface $categoryRepository;
 
     public function __construct(CategoryInterface $categoryRepository)
     {
@@ -34,10 +34,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             "name" => "required|string|max:255",
             "description" => "nullable|string",
-            "image_path" => "required|mimes:jpg,jpeg,png,svg,gif|max:10000000"
+            "icon_path" => "required|mimes:jpg,jpeg,png,svg,gif|max:10000000"
         ]);
 
         // generate slug

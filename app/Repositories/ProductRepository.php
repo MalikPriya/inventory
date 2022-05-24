@@ -119,6 +119,7 @@ class ProductRepository implements ProductInterface
 
     public function create(array $data)
     {
+        // dd($data);
         DB::beginTransaction();
 
         try {
@@ -126,16 +127,14 @@ class ProductRepository implements ProductInterface
             $newEntry = new Product;
             $newEntry->cat_id = $collectedData['cat_id'];
             $newEntry->sub_cat_id = $collectedData['sub_cat_id'];
-            $newEntry->collection_id = $collectedData['collection_id'];
             $newEntry->name = $collectedData['name'];
             $newEntry->short_desc = $collectedData['short_desc'];
             $newEntry->desc = $collectedData['desc'];
-            $newEntry->price = $collectedData['price'];
-            $newEntry->offer_price = $collectedData['offer_price'];
-            $newEntry->meta_title = $collectedData['meta_title'];
-            $newEntry->meta_desc = $collectedData['meta_desc'];
-            $newEntry->meta_keyword = $collectedData['meta_keyword'];
-            $newEntry->style_no = $collectedData['style_no'];
+            $newEntry->cost_price = $collectedData['cost_price'];
+            $newEntry->sell_price = $collectedData['sell_price'];
+            $newEntry->unit_value = $collectedData['unit_value'];
+            $newEntry->unit_type = $collectedData['unit_type'];
+
 
             // slug generate
             $slug = \Str::slug($collectedData['name'], '-');
@@ -170,29 +169,29 @@ class ProductRepository implements ProductInterface
             // check color & size
             // dd($data['color'], $data['size']);
 
-            if (!empty($data['color']) && !empty($data['size'])) {
-                $multipleColorData = [];
+            // if (!empty($data['color']) && !empty($data['size'])) {
+            //     $multipleColorData = [];
 
-                foreach ($data['color'] as $colorKey => $colorValue) {
-                    $multipleColorData[] = [
-                        'product_id' => $newEntry->id,
-                        'color' => $colorValue,
-                    ];
-                }
+            //     foreach ($data['color'] as $colorKey => $colorValue) {
+            //         $multipleColorData[] = [
+            //             'product_id' => $newEntry->id,
+            //             'color' => $colorValue,
+            //         ];
+            //     }
 
-                foreach ($data['size'] as $sizeKey => $sizeValue) {
-                    $multipleColorData[$sizeKey]['size'] = $sizeValue;
-                }
+            //     foreach ($data['size'] as $sizeKey => $sizeValue) {
+            //         $multipleColorData[$sizeKey]['size'] = $sizeValue;
+            //     }
 
-                // dd($multipleColorData);
+            //     // dd($multipleColorData);
 
-                ProductColorSize::insert($multipleColorData);
-            }
+            //     ProductColorSize::insert($multipleColorData);
+            // }
 
             DB::commit();
             return $newEntry;
         } catch (\Throwable $th) {
-            // throw $th;
+            throw $th;
             DB::rollback();
         }
     }

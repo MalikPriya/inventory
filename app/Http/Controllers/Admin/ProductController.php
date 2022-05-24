@@ -46,27 +46,23 @@ class ProductController extends Controller
         // dd($request->all());
 
         $request->validate([
-            "cat_id" => "required|integer",
-            "sub_cat_id" => "required|integer",
-            "collection_id" => "required|integer",
+            "cat_id" => "nullable|integer",
+            "sub_cat_id" => "nullable|integer",
             "name" => "required|string|max:255",
             "short_desc" => "required",
             "desc" => "required",
-            "price" => "required|integer",
-            "offer_price" => "required|integer",
-            "meta_title" => "required",
-            "meta_desc" => "required",
-            "meta_keyword" => "required",
-            "style_no" => "required",
+            "cost_price" => "required|integer",
+            "sell_price" => "required|integer",
+            "unit_value" => "integer",
+            "unit_type" => "string",
             "image" => "required",
-            "product_images" => "nullable|array",
-            "color" => "nullable|array",
-            "size" => "nullable|array",
+            "product_images" => "nullable|array"
         ]);
 
         $params = $request->except('_token');
+        // dd($params);
         $storeData = $this->productRepository->create($params);
-
+        // dd($storeData);
         if ($storeData) {
             return redirect()->route('admin.product.index');
         } else {

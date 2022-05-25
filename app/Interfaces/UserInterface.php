@@ -16,7 +16,7 @@ interface UserInterface
      */
     public function listById($id);
     /**
-     * This method is for create user
+     * This method is for create customer/supplier
      *
      */
     public function create(array $data);

@@ -29,91 +29,7 @@
             </div>
         </div>
         <nav class="main__nav">
-            <!--<ul>
-                <li class="{{ ( request()->is('admin/home*') ) ? 'active' : '' }}"><a href="{{ route('admin.home') }}"><i class="fi fi-br-home"></i> <span>Dashboard</span></a></li>
-
-                <li class="@if(request()->is('admin/category*') || request()->is('admin/subcategory*') || request()->is('admin/collection*')) { {{'active'}} }  @endif">
-                    <a href="#"><i class="fi fi-br-cube"></i> <span>Master</span></a>
-                    <ul>
-                        <li class="{{ ( request()->is('admin/category*') ) ? 'active' : '' }}"><a href="{{ route('admin.category.index') }}"><i class="fi fi-br-database"></i> <span>Category</span></a></li>
-
-                        {{-- <li class="{{ ( request()->is('admin/subcategory*') ) ? 'active' : '' }}"><a href="{{ route('admin.subcategory.index') }}"><i class="fi fi-br-database"></i> <span>Sub-category</span></a></li> --}}
-
-                        <li class="{{ ( request()->is('admin/collection*') ) ? 'active' : '' }}"><a href="{{ route('admin.collection.index') }}"><i class="fi fi-br-database"></i> <span>Collection</span></a></li>
-                    </ul>
-                </li>
-
-                <li class="@if(request()->is('admin/product*') || request()->is('admin/faq*')) { {{'active'}} }  @endif">
-                    <a href="#"><i class="fi fi-br-cube"></i> <span>Product Management</span></a>
-                    <ul>
-                        <li class="{{ ( request()->is('admin/product/list*') ) ? 'active' : '' }}"><a href="{{ route('admin.product.index') }}">All Product</a></li>
-
-                        <li class="{{ ( request()->is('admin/product/create*') ) ? 'active' : '' }}"><a href="{{ route('admin.product.create') }}">Add New</a></li>
-                    </ul>
-                </li>
-
-                <li class="{{ ( request()->is('admin/store*') ) ? 'active' : '' }}"><a href="{{ route('admin.store.index') }}"><i class="fi fi-br-database"></i> <span>Store Management</span></a></li>
-
-                <li class="{{ ( request()->is('admin/user*') ) ? 'active' : '' }}"><a href="{{ route('admin.user.index') }}"><i class="fi fi-br-database"></i> <span>User Management</span></a></li>
-                <li class="{{ ( request()->is('admin/useractivity*') ) ? 'active' : '' }}"><a href="{{ route('admin.useractivity.index') }}"><i class="fi fi-br-database"></i> <span>User Activity</span></a></li>
-                {{-- <li class="{{ ( request()->is('admin/useractivity*') ) ? 'active' : '' }}"><a href="{{ route('admin.useractivity.index') }}"><i class="fi fi-br-database"></i> <span>User Activity</span></a></li> --}}
-              {{-- <!--  <li class="{{ ( request()->is('admin/coupon*') ) ? 'active' : '' }}"><a href="{{ route('admin.coupon.index') }}"><i class="fi fi-br-database"></i> <span>Coupon Management</span></a></li>--> --}}
-              <li class="{{ ( request()->is('admin/offer*') ) ? 'active' : '' }}"><a href="{{ route('admin.offer.index') }}"><i class="fi fi-br-database"></i> <span>Offer Management</span></a></li>
-              {{--  <li class="{{ ( request()->is('admin/transaction*') ) ? 'active' : '' }}"><a href="{{ route('admin.transaction.index') }}"><i class="fi fi-br-database"></i> <span>Online Transactions</span></a></li> --}}
-              <li class="@if(request()->is('admin/order*')) { {{'active'}} }  @endif">
-                <a href="javascript: void(0)"><i class="fi fi-br-cube"></i> <span>Order Management</span></a>
-                <ul>
-                    <li class="{{ ( request()->is('admin/order') ) ? 'active' : '' }}"><a href="{{ route('admin.order.index') }}"><i class="fi fi-br-database"></i> <span>All Orders</span></a></li>
-
-                    <li class="{{ ( request()->is('admin/order?status=new') ) ? 'active' : '' }}"><a href="{{ route('admin.order.index', ['status'=>'1']) }}"><i class="fi fi-br-database"></i> <span>New Orders</span></a></li>
-
-                    <li class="{{ ( request()->is('admin/order?status=confirm') ) ? 'active' : '' }}"><a href="{{ route('admin.order.index', ['status'=>'2']) }}"><i class="fi fi-br-database"></i> <span>Confirm Orders</span></a></li>
-
-                    <li class="{{ ( request()->is('admin/order?status=ship') ) ? 'active' : '' }}"><a href="{{ route('admin.order.index', ['status'=>'3']) }}"><i class="fi fi-br-database"></i> <span>Shipped Orders</span></a></li>
-
-                    <li class="{{ ( request()->is('admin/order?status=deliver') ) ? 'active' : '' }}"><a href="{{ route('admin.order.index', ['status'=>'4']) }}"><i class="fi fi-br-database"></i> <span>Delivered Orders</span></a></li>
-
-                    <li class="{{ ( request()->is('admin/order?status=cancel') ) ? 'active' : '' }}"><a href="{{ route('admin.order.index', ['status'=>'5']) }}"><i class="fi fi-br-database"></i> <span>Cancelled Orders</span></a></li>
-                </ul>
-            </li>
-                <li class="@if(request()->is('admin/settings*') || request()->is('admin/faq*')) { {{'active'}} }  @endif">
-                    <a href="#"><i class="fi fi-br-cube"></i> <span>Settings</span></a>
-                    <ul>
-                        <li class="{{ ( request()->is('admin/settings*') ) ? 'active' : '' }}"><a href="{{ route('admin.settings.index') }}"><i class="fi fi-br-database"></i> <span>Site Settings</span></a></li>
-
-                        <li class="{{ ( request()->is('admin/faq*') ) ? 'active' : '' }}"><a href="{{ route('admin.faq.index') }}"><i class="fi fi-br-database"></i> <span>FAQs</span></a></li>
-                    </ul>
-                </li>
-
-                {{-- <li class="{{ ( request()->is('admin/customer*') ) ? 'active' : '' }}"><a href="{{ route('admin.customer.index') }}"><i class="fi fi-br-database"></i> <span>Customer</span></a></li>
-
-                <li class="{{ ( request()->is('admin/order*') ) ? 'active' : '' }}"><a href="{{ route('admin.order.index') }}"><i class="fi fi-br-database"></i> <span>Order</span></a></li>
-
-                <li class="{{ ( request()->is('admin/category*') ) ? 'active' : '' }}"><a href="{{ route('admin.category.index') }}"><i class="fi fi-br-database"></i> <span>Category</span></a></li>
-
-                <li class="{{ ( request()->is('admin/subcategory*') ) ? 'active' : '' }}"><a href="{{ route('admin.subcategory.index') }}"><i class="fi fi-br-database"></i> <span>Sub-category</span></a></li>
-
-                <li class="{{ ( request()->is('admin/collection*') ) ? 'active' : '' }}"><a href="{{ route('admin.collection.index') }}"><i class="fi fi-br-database"></i> <span>Collection</span></a></li>
-
-                <li class="{{ ( request()->is('admin/coupon*') ) ? 'active' : '' }}"><a href="{{ route('admin.coupon.index') }}"><i class="fi fi-br-database"></i> <span>Coupon</span></a></li>
-
-                <li class="{{ ( request()->is('admin/address*') ) ? 'active' : '' }}"><a href="{{ route('admin.address.index') }}"><i class="fi fi-br-database"></i> <span>Address</span></a></li>
-
-                <li class="{{ ( request()->is('admin/product*') ) ? 'active' : '' }}">
-                    <a href="#"><i class="fi fi-br-cube"></i> <span>Product</span></a>
-                    <ul>
-                        <li class="{{ ( request()->is('admin/product/list*') ) ? 'active' : '' }}"><a href="{{ route('admin.product.index') }}">All Product</a></li>
-                        <li class="{{ ( request()->is('admin/product/create*') ) ? 'active' : '' }}"><a href="{{ route('admin.product.create') }}">Add New</a></li>
-                    </ul>
-                </li>
-
-                <li class="{{ ( request()->is('admin/faq*') ) ? 'active' : '' }}"><a href="{{ route('admin.faq.index') }}"><i class="fi fi-br-database"></i> <span>FAQ</span></a></li>
-
-                <li class="{{ ( request()->is('admin/transaction*') ) ? 'active' : '' }}"><a href="{{ route('admin.transaction.index') }}"><i class="fi fi-br-database"></i> <span>Transaction</span></a></li>
-
-                <li class="{{ ( request()->is('admin/settings*') ) ? 'active' : '' }}"><a href="{{ route('admin.settings.index') }}"><i class="fi fi-br-database"></i> <span>Settings</span></a></li> --}}
-
-            </ul>-->
+            
 
             <ul>
                 <li>
@@ -134,14 +50,21 @@
                         <li class="{{ ( request()->is('admin/product/create*') ) ? 'active' : '' }}"><a href="{{ route('admin.product.create') }}">Add New</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#"><i class="fi fi-br-database"></i> <span>Offer Management</span></a>
+                <li class="@if(request()->is('admin/user*')) { {{'active'}} }  @endif">
+                    <a href="#"><i class="fi fi-br-cube"></i> <span>Customer/Supplier Management</span></a>
+                    <ul>
+                        <li class="{{ ( request()->is('admin/user/list*') ) ? 'active' : '' }}"><a href="{{ route('admin.user.index') }}">All users</a></li>
+
+                        <li class="{{ ( request()->is('admin/user/create*') ) ? 'active' : '' }}"><a href="{{ route('admin.user.create') }}">Add New</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="#"><i class="fi fi-br-database"></i> <span>User Activity</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fi fi-br-database"></i> <span>Settings</span></a>
+                <li class="@if(request()->is('admin/staff*')) { {{'active'}} }  @endif">
+                    <a href="#"><i class="fi fi-br-cube"></i> <span>Staff Management</span></a>
+                    <ul>
+                        <li class="{{ ( request()->is('admin/staff/list*') ) ? 'active' : '' }}"><a href="{{ route('admin.staff.index') }}">All Staffs</a></li>
+
+                        <li class="{{ ( request()->is('admin/staff/create*') ) ? 'active' : '' }}"><a href="{{ route('admin.staff.create') }}">Add New</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav>

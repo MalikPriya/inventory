@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\UserInterface;
 use App\User;
+use App\Models\StaffPostDetail;
 use App\Models\Customer;
 use App\Models\Supplier;
 use App\Models\Address;
@@ -116,26 +117,72 @@ class UserRepository implements UserInterface
      */
     public function createStaff(array $data)
     {
-        $collectedData = collect($data);
-        $newEntry = new User;
-        $newEntry->fname = $collectedData['fname'];
-        $newEntry->lname = $collectedData['lname'];
-        $newEntry->email = $collectedData['email'];
-        $newEntry->mobile = $collectedData['mobile'];
-        $newEntry->whatsapp_no = $collectedData['whatsapp_no'];
-        $newEntry->gender = $collectedData['gender'];
-        $newEntry->password = Hash::make($collectedData['password']);
+        try {
+            //code...
+            $collectedData = collect($data);
+            $newEntry = new User;
+            $newEntry->name = $collectedData['name'];
+            $newEntry->email = $collectedData['email'];
+            $newEntry->mobile = $collectedData['mobile'];
+            $newEntry->alias = $collectedData['alias'];
+            $newEntry->address = $collectedData['address'];
+            $newEntry->landmark = $collectedData['landmark'];
+            $newEntry->city = $collectedData['city'];
+            $newEntry->state = $collectedData['state'];
+            $newEntry->pin = $collectedData['pin'];
+            $newEntry->country = $collectedData['country'];
+            // $newEntry->user_id_front = $collectedData['user_id_front'];
+            // $newEntry->user_id_back = $collectedData['user_id_back'];
+            $newEntry->aadhar_no = $collectedData['aadhar_no'];
+            $newEntry->bank_account_no = $collectedData['bank_account_no'];
 
-        $upload_path = "uploads/user/";
-        $image = $collectedData['image'];
-        $imageName = time().".".$image->getClientOriginalName();
-        $image->move($upload_path, $imageName);
-        $uploadedImage = $imageName;
-        $newEntry->image= $upload_path.$uploadedImage;
+            $newEntry->password = Hash::make('secret');
 
-        $newEntry->save();
 
-        return $newEntry;
+            $upload_path = "uploads/user/";
+            $image = $collectedData['image'];
+            $imageName = time().".".$image->getClientOriginalName();
+            $image->move($upload_path, $imageName);
+            $uploadedImage = $imageName;
+            $newEntry->image= $upload_path.$uploadedImage;
+
+            $user_id_upload_path = "uploads/user/id";
+            $userIdImage = $collectedData['user_id_back'];
+            $userIdImageName = time().".".$userIdImage->getClientOriginalName();
+            $userIdImage->move($user_id_upload_path, $userIdImageName);
+            $uploadeduserIdImage = $userIdImageName;
+            $newEntry->user_id_back= $user_id_upload_path.$uploadeduserIdImage;
+
+            $userIdImageFront = $collectedData['user_id_front'];
+            $userIdImageFrontName = time().".".$userIdImageFront->getClientOriginalName();
+            $image->move($user_id_upload_path, $userIdImageFrontName);
+            $uploadeduserIdImageFront = $userIdImageName;
+            $newEntry->user_id_front= $user_id_upload_path.$uploadeduserIdImageFront;
+
+            $newEntry->save();
+
+            $allowance = new StaffPostDetail;
+            $allowance->staff_id = $newEntry->id;
+            $allowance->designation = $collectedData['designation'];
+            $allowance->salary = $collectedData['salary'];
+            $allowance->house_rent = $collectedData['house_rent'];
+            $allowance->convenience = $collectedData['convenience'];
+            $allowance->dearness = $collectedData['dearness'];
+            $allowance->medical = $collectedData['medical'];
+            $allowance->overtime = $collectedData['overtime'];
+            $allowance->city_compensatory = $collectedData['city_compensatory'];
+            $allowance->project = $collectedData['project'];
+            $allowance->food = $collectedData['food'];
+            $allowance->special = $collectedData['special'];
+
+            $allowance->save();
+            // $newEntry->password = Hash::make($collectedData['password']);
+            
+
+            return $newEntry;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

@@ -284,6 +284,16 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::get('/{id}/delete', 'Admin\UserController@destroy')->name('delete');
         });
 
+        // staff
+        Route::prefix('staff')->name('staff.')->group(function() {
+            Route::get('/', 'Admin\UserController@staffList')->name('index');
+            Route::view('/create', 'admin.staff.create')->name('create');
+            Route::post('/store', 'Admin\UserController@storeStaff')->name('store');
+            Route::get('/{id}/view', 'Admin\UserController@showStaff')->name('view');
+            Route::post('/{id}/update', 'Admin\UserController@updateStaff')->name('update');
+            Route::get('/{id}/delete', 'Admin\UserController@destroyStaff')->name('delete');
+        });
+
         //user activity
         Route::prefix('useractivity')->name('useractivity.')->group(function() {
             Route::get('/', 'Admin\ActivityController@index')->name('index');

@@ -68,6 +68,43 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->withInput($request->all());
         }
     }
+
+    /**
+     * This method is for create Staff
+     *
+     */
+    public function storeStaff(Request $request)
+    {
+        $request->validate([
+            "name" => "required|string|max:255",
+            "email" => "required|string|max:255|unique:users,email",
+            "mobile" => "required|integer",
+            "alias" => "required|integer",
+            "type" => "required",
+            "aadhar_no" => "required",
+            "bank_account_no" => "required",
+            "address" => "required|string",
+            "landmark" => "required|string",
+            "state" => "required|string",
+            "city" => "required|string",
+            "pin" => "required|string",
+            "country" => "required|string",
+            "image" =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000",
+            "user_id_front" =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000",
+            "user_id_back" =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000"
+        ]);
+
+        // dd($request->get('type'));
+
+        $params = $request->except('_token');
+        $storeData = $this->userRepository->createStaff($params);
+
+        if ($storeData) {
+            return redirect()->route('admin.user.index');
+        } else {
+            return redirect()->route('admin.user.index')->withInput($request->all());
+        }
+    }
     /**
      * This method is for show user details
      * @param  $id

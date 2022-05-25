@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 use App\Interfaces\UserInterface;
 use App\User;
+use App\Models\Customer;
+use App\Models\Supplier;
+use App\Models\Address;
 use App\Models\Distributor;
 use App\Activity;
 use App\StoreVisit;
@@ -38,6 +41,82 @@ class UserRepository implements UserInterface
     public function create(array $data)
     {
         $collectedData = collect($data);
+        // dd($collectedData);
+        if ($collectedData['type'] == 1) {
+            $newEntry = new Customer;
+            $newEntry->name = $collectedData['name'];
+            $newEntry->email = $collectedData['email'];
+            $newEntry->mobile = $collectedData['mobile'];
+            $newEntry->whatsapp_no = $collectedData['whatsapp_no'];
+            $newEntry->credit_limit = $collectedData['credit_limit'];
+            $newEntry->credit_days = $collectedData['credit_days'];
+            $newEntry->gst_number = $collectedData['gst_number'];
+
+            $upload_path = "uploads/user/";
+            $image = $collectedData['gst_file'];
+            $imageName = time().".".$image->getClientOriginalName();
+            $image->move($upload_path, $imageName);
+            $uploadedImage = $imageName;
+            $newEntry->gst_file= $upload_path.$uploadedImage;
+            
+            $newEntry->billing_address = $collectedData['billing_address'];
+            $newEntry->billing_landmark = $collectedData['billing_landmark'];
+            $newEntry->billing_city = $collectedData['billing_city'];
+            $newEntry->billing_state = $collectedData['billing_state'];
+            $newEntry->billing_pin = $collectedData['billing_pin'];
+            $newEntry->billing_country = $collectedData['billing_country'];
+
+            $newEntry->shipping_address = $collectedData['shipping_address'];
+            $newEntry->shipping_landmark = $collectedData['shipping_landmark'];
+            $newEntry->shipping_city = $collectedData['shipping_city'];
+            $newEntry->shipping_state = $collectedData['shipping_state'];
+            $newEntry->shipping_pin = $collectedData['shipping_pin'];
+            $newEntry->shipping_country = $collectedData['shipping_country'];
+            $newEntry->save();
+        }
+        if ($collectedData['type'] == 2) {
+            $newEntry = new Supplier;
+            $newEntry->name = $collectedData['name'];
+            $newEntry->email = $collectedData['email'];
+            $newEntry->mobile = $collectedData['mobile'];
+            $newEntry->whatsapp_no = $collectedData['whatsapp_no'];
+            $newEntry->credit_limit = $collectedData['credit_limit'];
+            $newEntry->credit_days = $collectedData['credit_days'];
+            $newEntry->gst_number = $collectedData['gst_number'];
+
+            $upload_path = "uploads/user/";
+            $image = $collectedData['gst_file'];
+            $imageName = time().".".$image->getClientOriginalName();
+            $image->move($upload_path, $imageName);
+            $uploadedImage = $imageName;
+            $newEntry->gst_file= $upload_path.$uploadedImage;
+            
+            $newEntry->billing_address = $collectedData['billing_address'];
+            $newEntry->billing_landmark = $collectedData['billing_landmark'];
+            $newEntry->billing_city = $collectedData['billing_city'];
+            $newEntry->billing_state = $collectedData['billing_state'];
+            $newEntry->billing_pin = $collectedData['billing_pin'];
+            $newEntry->billing_country = $collectedData['billing_country'];
+
+            $newEntry->shipping_address = $collectedData['shipping_address'];
+            $newEntry->shipping_landmark = $collectedData['shipping_landmark'];
+            $newEntry->shipping_city = $collectedData['shipping_city'];
+            $newEntry->shipping_state = $collectedData['shipping_state'];
+            $newEntry->shipping_pin = $collectedData['shipping_pin'];
+            $newEntry->shipping_country = $collectedData['shipping_country'];
+            $newEntry->save();
+        }
+
+        return $newEntry;
+    }
+
+    /**
+     * This method is for create staff user
+     *
+     */
+    public function createStaff(array $data)
+    {
+        $collectedData = collect($data);
         $newEntry = new User;
         $newEntry->fname = $collectedData['fname'];
         $newEntry->lname = $collectedData['lname'];
@@ -45,15 +124,6 @@ class UserRepository implements UserInterface
         $newEntry->mobile = $collectedData['mobile'];
         $newEntry->whatsapp_no = $collectedData['whatsapp_no'];
         $newEntry->gender = $collectedData['gender'];
-        $newEntry->employee_id = $collectedData['employee_id'];
-        $newEntry->type = $collectedData['type'];
-        $newEntry->address = $collectedData['address'];
-        $newEntry->landmark = $collectedData['landmark'];
-        $newEntry->state = $collectedData['state'];
-        $newEntry->city = $collectedData['city'];
-        $newEntry->pin = $collectedData['pin'];
-        $newEntry->aadhar_no = $collectedData['aadhar_no'];
-        $newEntry->pan_no = $collectedData['pan_no'];
         $newEntry->password = Hash::make($collectedData['password']);
 
         $upload_path = "uploads/user/";
@@ -67,6 +137,7 @@ class UserRepository implements UserInterface
 
         return $newEntry;
     }
+
     /**
      * This method is for user update
      *

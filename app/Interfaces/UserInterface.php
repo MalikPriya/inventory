@@ -21,6 +21,11 @@ interface UserInterface
      */
     public function create(array $data);
     /**
+     * This method is for create staff user
+     *
+     */
+    public function createStaff(array $data);
+    /**
      * This method is for user update
      *
      *

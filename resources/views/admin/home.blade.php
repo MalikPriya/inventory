@@ -51,9 +51,9 @@
                     <tr>
                         <th class="text-center"><i class="fi fi-br-picture"></i></th>
                         <th>Name</th>
-                        <th>Style</th>
                         <th>Category</th>
-                        <th>Price</th>
+                        <th>Cost Price</th>
+                        <th>Sell Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,9 +70,9 @@
                                     <a href="{{ route('admin.product.view', $product->id) }}">View</a>
                                 </div>
                             </td>
-                            <td>{{$product->style_no}}</td>
                             <td>{{$product->category ? $product->category->name : ''}}</td>
-                            <td>Rs. {{$product->offer_price}}</td>
+                            <td>Rs. {{$product->cost_price}}</td>
+                            <td>Rs. {{$product->sell_price}}</td>
                         </tr>
                     @endforeach
                 </tbody>

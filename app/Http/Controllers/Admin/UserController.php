@@ -34,24 +34,30 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "fname" => "required|string|max:255",
-            "lname" => "required|string|max:255",
+            "name" => "required|string|max:255",
             "email" => "required|string|max:255|unique:users,email",
-            "mobile" => "required|integer|digits:10",
-            "whatsapp_no" => "required|integer|digits:10",
-            "gender" => "required|string",
-            "type" => "required|string",
-            "employee_id" => "string|min:1",
-            "address" => "required|string",
-            "landmark" => "required|string",
-            "state" => "required|string",
-            "city" => "required|string",
-            "aadhar_no" => "required|string",
-            "pan_no" => "required|string",
-            "pin" => "required|string",
-            "password" => "required",
-            "image"    =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000"
+            "mobile" => "required|integer",
+            "whatsapp_no" => "required|integer",
+            "type" => "required",
+            "credit_limit" => "required",
+            "credit_days" => "required",
+            "gst_number" => "required",
+            "shipping_address" => "required|string",
+            "shipping_landmark" => "required|string",
+            "shipping_state" => "required|string",
+            "shipping_city" => "required|string",
+            "shipping_pin" => "required|string",
+            "shipping_country" => "required|string",
+            "billing_address" => "required|string",
+            "billing_landmark" => "required|string",
+            "billing_state" => "required|string",
+            "billing_city" => "required|string",
+            "billing_pin" => "required|string",
+            "billing_country" => "required|string",
+            "gst_file" =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000"
         ]);
+
+        // dd($request->get('type'));
 
         $params = $request->except('_token');
         $storeData = $this->userRepository->create($params);

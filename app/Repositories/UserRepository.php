@@ -25,6 +25,23 @@ class UserRepository implements UserInterface
     {
         return User::all();
     }
+
+    /**
+     * This method is for show customer list
+     *
+     */
+    public function listAllCustomer()
+    {
+        return Customer::all();
+    }
+    /**
+     * This method is for show Supplier list
+     *
+     */
+    public function listAllSupplier()
+    {
+        return Supplier::all();
+    }
     /**
      * This method is for show user details
      * @param  $id
@@ -32,8 +49,10 @@ class UserRepository implements UserInterface
      */
     public function listById($id)
     {
-       // return User::where('id', $id)->get();
-       return User::find($id);
+        $staff = User::find($id);
+        $StaffPostDetail = StaffPostDetail::where('user_id', $id);
+
+       return User::where('id', $id)->get();
     }
     /**
      * This method is for create user
@@ -46,6 +65,7 @@ class UserRepository implements UserInterface
         if ($collectedData['type'] == 1) {
             $newEntry = new Customer;
             $newEntry->name = $collectedData['name'];
+            $newEntry->official_name = $collectedData['official_name'];
             $newEntry->email = $collectedData['email'];
             $newEntry->mobile = $collectedData['mobile'];
             $newEntry->whatsapp_no = $collectedData['whatsapp_no'];
@@ -146,18 +166,7 @@ class UserRepository implements UserInterface
             $uploadedImage = $imageName;
             $newEntry->image= $upload_path.$uploadedImage;
 
-            $user_id_upload_path = "uploads/user/id";
-            $userIdImage = $collectedData['user_id_back'];
-            $userIdImageName = time().".".$userIdImage->getClientOriginalName();
-            $userIdImage->move($user_id_upload_path, $userIdImageName);
-            $uploadeduserIdImage = $userIdImageName;
-            $newEntry->user_id_back= $user_id_upload_path.$uploadeduserIdImage;
-
-            $userIdImageFront = $collectedData['user_id_front'];
-            $userIdImageFrontName = time().".".$userIdImageFront->getClientOriginalName();
-            $image->move($user_id_upload_path, $userIdImageFrontName);
-            $uploadeduserIdImageFront = $userIdImageName;
-            $newEntry->user_id_front= $user_id_upload_path.$uploadeduserIdImageFront;
+            
 
             $newEntry->save();
 

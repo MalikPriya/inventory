@@ -12,48 +12,48 @@
                 <div class="row m-3">
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Name</label>
-                        <input type="text" name="name" placeholder="User Name" class="form-control" value="{{old('name')}}">
+                        <input type="text" name="name" placeholder="User Name" class="form-control" value="{{$data['name']}}">
                         @error('name') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Official name</label>
-                        <input type="text" name="official_name" placeholder="User official_name" class="form-control" value="{{old('official_name')}}">
+                        <input type="text" name="official_name" placeholder="User official_name" class="form-control" value="{{$data['official_name']}}">
                         @error('official_name') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Alias</label>
-                        <input type="text" name="alias" placeholder="User alias" class="form-control" value="{{old('alias')}}">
+                        <input type="text" name="alias" placeholder="User alias" class="form-control" value="{{$data['alias']}}">
                         @error('alias') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Email</label>
-                        <input type="email" name="email" placeholder="User email" class="form-control" value="{{old('email')}}">
+                        <input type="email" name="email" placeholder="User email" class="form-control" value="{{$data['email']}}">
                         @error('email') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Mobile</label>
-                        <input type="tel" name="mobile" placeholder="User mobile" class="form-control" value="{{old('mobile')}}">
+                        <input type="tel" name="mobile" placeholder="User mobile" class="form-control" value="{{$data['mobile']}}">
                         @error('mobile') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Aadhar Number</label>
-                        <input type="number" name="aadhar_no" placeholder="User GST Number" class="form-control" value="{{old('aadhar_no')}}">
+                        <input type="number" name="aadhar_no" placeholder="User GST Number" class="form-control" value="{{$data['aadhar_no']}}">
                         @error('aadhar_no') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Salary</label>
-                        <input type="number" name="salary" placeholder="User GST Number" class="form-control" value="{{old('salary')}}">
+                        <input type="number" name="salary" placeholder="User GST Number" class="form-control" value="{{$data['salary']}}">
                         @error('salary') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Bank account no</label>
-                        <input type="tel" name="bank_account_no" placeholder="User GST Number" class="form-control" value="{{old('bank_account_no')}}">
+                        <input type="tel" name="bank_account_no" placeholder="User GST Number" class="form-control" value="{{$data['bank_account_no']}}">
                         @error('bank_account_no') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div class="form-group col-sm-4 mb-3">
                         <label for="">Designition</label>
-                        <input type="tel" name="designation" placeholder="User GST Number" class="form-control" value="{{old('designation')}}">
+                        <input type="tel" name="designation" placeholder="User GST Number" class="form-control" value="{{$data['designation']}}">
                         @error('designation') <p class="small text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                                     <label for="inputPassword6" class="col-form-label">House Rent</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="house_rent" value="{{old('house_rent')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="house_rent" value="{{$data['name']}}">
                                     @error('house_rent') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -88,7 +88,7 @@
                                     <label for="inputprice6" class="col-form-label">Convenience</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="convenience" value="{{old('convenience')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="convenience" value="{{$data['name']}}">
                                     @error('convenience') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -102,7 +102,7 @@
                                     <label for="inputprice6" class="col-form-label">Dearness</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="dearness" value="{{old('dearness')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="dearness" value="{{$data['name']}}">
                                     @error('dearness') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -116,7 +116,7 @@
                                     <label for="inputprice6" class="col-form-label">Medical</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="medical" value="{{old('medical')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="medical" value="{{$data['name']}}">
                                     @error('medical') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -130,7 +130,7 @@
                                     <label for="inputprice6" class="col-form-label">Overtime</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="number" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="overtime" value="{{old('overtime')}}">
+                                    <input type="number" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="overtime" value="{{$data['name']}}">
                                     @error('overtime') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -144,7 +144,7 @@
                                     <label for="inputprice6" class="col-form-label">City Compensatory</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="city_compensatory" value="{{old('city_compensatory')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="city_compensatory" value="{{$data['name']}}">
                                     @error('city_compensatory') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -158,7 +158,7 @@
                                     <label for="inputprice6" class="col-form-label">Project</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="project" value="{{old('project')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="project" value="{{$data['name']}}">
                                     @error('project') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -172,7 +172,7 @@
                                     <label for="inputprice6" class="col-form-label">Food</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="food" value="{{old('food')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="food" value="{{$data['name']}}">
                                     @error('food') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -186,7 +186,7 @@
                                     <label for="inputprice6" class="col-form-label">Special</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="special" value="{{old('special')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="special" value="{{$data['name']}}">
                                     @error('special') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -207,7 +207,7 @@
                                     <label for="inputPassword6" class="col-form-label">Address</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="address" value="{{old('address')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="address" value="{{$data['name']}}">
                                     @error('address') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -221,7 +221,7 @@
                                     <label for="inputprice6" class="col-form-label">Landmark</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="landmark" value="{{old('landmark')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="landmark" value="{{$data['name']}}">
                                     @error('landmark') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -235,7 +235,7 @@
                                     <label for="inputprice6" class="col-form-label">state</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="state" value="{{old('state')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="state" value="{{$data['name']}}">
                                     @error('state') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -249,7 +249,7 @@
                                     <label for="inputprice6" class="col-form-label">city</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="city" value="{{old('city')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="city" value="{{$data['name']}}">
                                     @error('city') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -263,7 +263,7 @@
                                     <label for="inputprice6" class="col-form-label">pin</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="number" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="pin" value="{{old('pin')}}">
+                                    <input type="number" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="pin" value="{{$data['name']}}">
                                     @error('pin') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">
@@ -277,7 +277,7 @@
                                     <label for="inputprice6" class="col-form-label">country</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="country" value="{{old('country')}}">
+                                    <input type="text" id="inputprice6" class="form-control" aria-describedby="priceHelpInline" name="country" value="{{$data['name']}}">
                                     @error('country') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                                 <div class="col-auto">

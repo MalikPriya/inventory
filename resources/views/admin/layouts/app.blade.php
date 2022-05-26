@@ -53,7 +53,9 @@
                 <li class="@if(request()->is('admin/user*')) { {{'active'}} }  @endif">
                     <a href="#"><i class="fi fi-br-cube"></i> <span>Customer/Supplier Management</span></a>
                     <ul>
-                        <li class="{{ ( request()->is('admin/user/list*') ) ? 'active' : '' }}"><a href="{{ route('admin.user.index') }}">All users</a></li>
+                        <li class="{{ ( request()->is('admin/user/list/customer*') ) ? 'active' : '' }}"><a href="{{ route('admin.user.index', 'customer') }}">Customers</a></li>
+
+                        <li class="{{ ( request()->is('admin/user/list/supplier*') ) ? 'active' : '' }}"><a href="{{ route('admin.user.index', 'supplier') }}">Suppliers</a></li>
 
                         <li class="{{ ( request()->is('admin/user/create*') ) ? 'active' : '' }}"><a href="{{ route('admin.user.create') }}">Add New</a></li>
                     </ul>
@@ -61,7 +63,7 @@
                 <li class="@if(request()->is('admin/staff*')) { {{'active'}} }  @endif">
                     <a href="#"><i class="fi fi-br-cube"></i> <span>Staff Management</span></a>
                     <ul>
-                        <li class="{{ ( request()->is('admin/staff/list*') ) ? 'active' : '' }}"><a href="{{ route('admin.staff.index') }}">All Staffs</a></li>
+                        <li class="{{ ( request()->is('admin/staff') ) ? 'active' : '' }}"><a href="{{ route('admin.staff.index') }}">All Staffs</a></li>
 
                         <li class="{{ ( request()->is('admin/staff/create*') ) ? 'active' : '' }}"><a href="{{ route('admin.staff.create') }}">Add New</a></li>
                     </ul>

@@ -13,7 +13,7 @@ class CreateStaffPostDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('staff_allowance', function (Blueprint $table) {
+        Schema::create('staff_post_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('staff_id');
             $table->string('designation', 100)->nullable();

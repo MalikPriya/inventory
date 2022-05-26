@@ -274,7 +274,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
         // user
         Route::prefix('user')->name('user.')->group(function() {
-            Route::get('/', 'Admin\UserController@index')->name('index');
+            Route::get('/list/{userType}', 'Admin\UserController@index')->name('index');
             Route::view('/create', 'admin.user.create')->name('create');
             Route::post('/store', 'Admin\UserController@store')->name('store');
             Route::get('/{id}/view', 'Admin\UserController@show')->name('view');
@@ -290,6 +290,8 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::view('/create', 'admin.staff.create')->name('create');
             Route::post('/store', 'Admin\UserController@storeStaff')->name('store');
             Route::get('/{id}/view', 'Admin\UserController@showStaff')->name('view');
+            Route::get('/{id}/edit', 'Admin\UserController@editStaff')->name('edit');
+
             Route::post('/{id}/update', 'Admin\UserController@updateStaff')->name('update');
             Route::get('/{id}/delete', 'Admin\UserController@destroyStaff')->name('delete');
         });

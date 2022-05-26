@@ -22,10 +22,27 @@ class UserController extends Controller
      * This method is for show user list
      *
      */
-    public function index(Request $request)
+    public function index(Request $request, $userType = '')
+    {
+        // dd($userType);
+        if ($userType == 'customer') {
+            $data = $this->userRepository->listAllCustomer();
+        }
+        if ($userType == 'supplier') {
+            $data = $this->userRepository->listAllSupplier();
+        }
+        
+        return view('admin.user.index', compact('data'));
+    }
+
+    /**
+     * This method is for show user list
+     *
+     */
+    public function staffList(Request $request)
     {
         $data = $this->userRepository->listAll();
-        return view('admin.user.index', compact('data'));
+        return view('admin.staff.index', compact('data'));
     }
     /**
      * This method is for create user
@@ -75,20 +92,23 @@ class UserController extends Controller
      */
     public function storeStaff(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            "name" => "required|string|max:255",
-            "email" => "required|string|max:255|unique:users,email",
-            "mobile" => "required|integer",
-            "alias" => "required|integer",
-            "type" => "required",
-            "aadhar_no" => "required",
-            "bank_account_no" => "required",
-            "address" => "required|string",
-            "landmark" => "required|string",
-            "state" => "required|string",
-            "city" => "required|string",
-            "pin" => "required|string",
-            "country" => "required|string",
+            "name" => "nullable|string|max:255",
+            "official_name" => "nullable|string|max:255",
+            "email" => "nullable|string|max:255|unique:users,email",
+            "mobile" => "nullable|integer",
+            "alias" => "nullable",
+            "type" => "nullable",
+            "aadhar_no" => "nullable",
+            "bank_account_no" => "nullable",
+            "designation" => "nullable",
+            "address" => "nullable|string",
+            "landmark" => "nullable|string",
+            "state" => "nullable|string",
+            "city" => "nullable|string",
+            "pin" => "nullable|string",
+            "country" => "nullable|string",
             "image" =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000",
             "user_id_front" =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000",
             "user_id_back" =>"nullable|mimes:jpg,jpeg,png,svg,gif|max:10000000"
@@ -97,6 +117,7 @@ class UserController extends Controller
         // dd($request->get('type'));
 
         $params = $request->except('_token');
+        // dd($params);
         $storeData = $this->userRepository->createStaff($params);
 
         if ($storeData) {
@@ -114,6 +135,17 @@ class UserController extends Controller
     {
         $data = $this->userRepository->listById($id);
         return view('admin.user.detail', compact('data'));
+    }
+    /**
+     * This method is for edit staff details
+     * @param  $id
+     *
+     */
+    public function editStaff(Request $request, $id)
+    {
+        $data = $this->userRepository->listById($id);
+        dd($data);
+        return view('admin.staff.edit', compact('data'));
     }
     /**
      * This method is for user update

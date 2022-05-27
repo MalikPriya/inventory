@@ -14,11 +14,11 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    // private ProductInterface $productRepository;
+    // private ProductInterface $PurchaseOrderRepository;
 
-    public function __construct(ProductInterface $productRepository)
+    public function __construct(ProductInterface $PurchaseOrderRepository)
     {
-        $this->productRepository = $productRepository;
+        $this->PurchaseOrderRepository = $PurchaseOrderRepository;
     }
 
     public function index(Request $request)

@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class OfferController extends Controller
 {
-    private OfferInterface $offerRepository;
+    // private OfferInterface $offerRepository;
 
     public function __construct(OfferInterface $offerRepository)
     {

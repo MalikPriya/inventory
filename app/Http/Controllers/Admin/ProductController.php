@@ -1,0 +1,225 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Interfaces\ProductInterface;
+use App\Models\Product;
+use App\Models\ProductColorSize;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
+class ProductController extends Controller
+{
+    // private ProductInterface $productRepository;
+
+    public function __construct(ProductInterface $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
+    public function index(Request $request)
+    {
+        if (!empty($request->term)) {
+            $data = $this->productRepository->getSearchProducts($request->term);
+        } else {
+            $data = $this->productRepository->listAll();
+        }
+        return view('admin.product.index', compact('data'));
+    }
+
+    public function create(Request $request)
+    {
+        $categories = $this->productRepository->categoryList();
+        $sub_categories = $this->productRepository->subCategoryList();
+        $collections = $this->productRepository->collectionList();
+        $colors = $this->productRepository->colorList();
+        $sizes = $this->productRepository->sizeList();
+        return view('admin.product.create', compact('categories', 'sub_categories', 'collections', 'colors', 'sizes'));
+    }
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            "cat_id" => "nullable|integer",
+            "sub_cat_id" => "nullable|integer",
+            "name" => "required|string|max:255",
+            "short_desc" => "required",
+            "desc" => "required",
+            "cost_price" => "required|integer",
+            "sell_price" => "required|integer",
+            "unit_value" => "integer",
+            "unit_type" => "string",
+            "image" => "required",
+            "product_images" => "nullable|array"
+        ]);
+
+        $params = $request->except('_token');
+        // dd($params);
+        $storeData = $this->productRepository->create($params);
+        // dd($storeData);
+        if ($storeData) {
+            return redirect()->route('admin.product.index');
+        } else {
+            return redirect()->route('admin.product.create')->withInput($request->all());
+        }
+    }
+
+    public function show(Request $request, $id)
+    {
+        $data = $this->productRepository->listById($id);
+        $images = $this->productRepository->listImagesById($id);
+        // dd($images);
+        return view('admin.product.detail', compact('data', 'images'));
+    }
+
+    public function size(Request $request)
+    {
+        $productId = $request->productId;
+        $colorId = $request->colorId;
+
+        $data = ProductColorSize::where('product_id', $productId)->where('color', $colorId)->get();
+
+        $resp = [];
+
+        foreach ($data as $dataKey => $dataValue) {
+            $resp[] = [
+                'variationId' => $dataValue->id,
+                'sizeId' => $dataValue->size,
+                'sizeName' => $dataValue->sizeDetails->name
+            ];
+        }
+
+        return response()->json(['error' => false, 'data' => $resp]);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $categories = $this->productRepository->categoryList();
+        $sub_categories = $this->productRepository->subCategoryList();
+        $collections = $this->productRepository->collectionList();
+        $data = $this->productRepository->listById($id);
+        $colors = $this->productRepository->colorListByName();
+        $sizes = $this->productRepository->sizeList();
+        $images = $this->productRepository->listImagesById($id);
+
+        $productColorGroup = ProductColorSize::select('color')->where('product_id', $id)->groupBy('color')->get();
+
+        // dd($productColorGroup);
+
+        return view('admin.product.edit', compact('id', 'data', 'categories', 'sub_categories', 'collections', 'images', 'colors', 'sizes', 'productColorGroup'));
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            "cat_id" => "nullable|integer",
+            "sub_cat_id" => "nullable|integer",
+            "name" => "required|string|max:255",
+            "short_desc" => "required",
+            "desc" => "required",
+            "cost_price" => "required|integer",
+            "sell_price" => "required|integer",
+            "unit_value" => "integer",
+            "unit_type" => "string",
+            "image" => "nullable",
+            "product_images" => "nullable|array"
+        ]);
+        // dd($request->product_id);
+        $params = $request->except('_token');
+        $storeData = $this->productRepository->update($request->product_id, $params);
+
+        if ($storeData) {
+            return redirect()->route('admin.product.index')->with('success', 'Product updated successfully');
+        } else {
+            // dd($request->all());
+            return redirect()->route('admin.product.update', $request->product_id)->withInput($request->all());
+        }
+    }
+
+    public function status(Request $request, $id)
+    {
+        $storeData = $this->productRepository->toggle($id);
+
+        if ($storeData) {
+            return redirect()->route('admin.product.index');
+        } else {
+            return redirect()->route('admin.product.create')->withInput($request->all());
+        }
+    }
+
+    public function sale(Request $request, $id)
+    {
+        $storeData = $this->productRepository->sale($id);
+
+        // if ($storeData) {
+        return redirect()->route('admin.product.index');
+        // } else {
+        //     return redirect()->route('admin.product.create')->withInput($request->all());
+        // }
+    }
+
+    public function trending(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        if ($product->is_trending == 1) {
+            $product->is_trending = 0;
+        } else {
+            $product->is_trending = 1;
+        }
+        $product->save();
+
+        return redirect()->route('admin.product.index');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $this->productRepository->delete($id);
+
+        return redirect()->route('admin.product.index');
+    }
+
+    public function destroySingleImage(Request $request, $id)
+    {
+        $this->productRepository->deleteSingleImage($id);
+        return redirect()->back();
+
+        // return redirect()->route('admin.product.index');
+    }
+    public function bulkDestroy(Request $request)
+    {
+        // $request->validate([
+        //     'bulk_action' => 'required',
+        //     'delete_check' => 'required|array',
+        // ]);
+
+        $validator = Validator::make($request->all(), [
+            'bulk_action' => 'required',
+            'delete_check' => 'required|array',
+        ], [
+            'delete_check.*' => 'Please select at least one item'
+        ]);
+
+        if (!$validator->fails()) {
+            if ($request['bulk_action'] == 'delete') {
+                foreach ($request->delete_check as $index => $delete_id) {
+                    Product::where('id', $delete_id)->delete();
+                }
+
+                return redirect()->route('admin.product.index')->with('success', 'Selected items deleted');
+            } else {
+                return redirect()->route('admin.product.index')->with('failure', 'Please select an action')->withInput($request->all());
+            }
+        } else {
+            return redirect()->route('admin.product.index')->with('failure', $validator->errors()->first())->withInput($request->all());
+        }
+    }
+}
